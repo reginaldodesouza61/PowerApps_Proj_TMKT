@@ -1,0 +1,205 @@
+{
+  "12c127d6-7532-4557-b028-4c2011270d3a": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "OneDrive for Business",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1546/1.0.1546.2665/onedriveforbusiness/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_onedriveforbusiness",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "b207307e-02e0-4bbe-b2d7-49dbc80b1b07"
+    ],
+    "id": "12c127d6-7532-4557-b028-4c2011270d3a"
+  },
+  "1e5cb0dd-1546-43cc-ad1f-df9e5e988e36": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "OneDrive for Business",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1546/1.0.1546.2665/onedriveforbusiness/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_onedriveforbusiness",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "5cb2c5ba-8eb9-40b8-ba9a-c635680867e5"
+    ],
+    "id": "1e5cb0dd-1546-43cc-ad1f-df9e5e988e36"
+  },
+  "5cb2c5ba-8eb9-40b8-ba9a-c635680867e5": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Excel",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1599/1.0.1599.3017/excel/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_excel",
+      "parameterHints": {
+        "1e5cb0dd-1546-43cc-ad1f-df9e5e988e36": {
+          "value": "fileSource"
+        }
+      },
+      "parameterHintsV2": {
+        "fileSource": {
+          "value": "1e5cb0dd-1546-43cc-ad1f-df9e5e988e36"
+        }
+      }
+    },
+    "datasets": {
+      "b!CrfTSrIZxkab5zj1s2BX9O5lqIe2RrBMkBmYdxaD9oG4EjYOMetySI6zIlnq36CL.017VH2Q57DPYSVH3JTIJGJAECRAEPOYWNW": {
+        "dataSources": {
+          "Agentes": {
+            "tableName": "Agentes"
+          },
+          "Dados": {
+            "tableName": "Dados"
+          },
+          "Equipes": {
+            "tableName": "Equipes"
+          },
+          "Tipo": {
+            "tableName": "Tipo"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Agentes",
+      "Dados",
+      "Equipes",
+      "Tipo",
+      "Horas"
+    ],
+    "dependencies": {
+      "fileSource": "1e5cb0dd-1546-43cc-ad1f-df9e5e988e36"
+    },
+    "dependents": [],
+    "id": "5cb2c5ba-8eb9-40b8-ba9a-c635680867e5"
+  },
+  "60dbed43-c898-4b42-b9fc-551fc94290cb": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Usuários do Office 365",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1593/1.0.1593.2980/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "UsuáriosdoOffice365"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "60dbed43-c898-4b42-b9fc-551fc94290cb"
+  },
+  "b207307e-02e0-4bbe-b2d7-49dbc80b1b07": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Excel",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1599/1.0.1599.3017/excel/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_excel",
+      "parameterHints": {
+        "12c127d6-7532-4557-b028-4c2011270d3a": {
+          "value": "fileSource"
+        }
+      },
+      "parameterHintsV2": {
+        "fileSource": {
+          "value": "12c127d6-7532-4557-b028-4c2011270d3a"
+        }
+      }
+    },
+    "datasets": {
+      "b!CrfTSrIZxkab5zj1s2BX9O5lqIe2RrBMkBmYdxaD9oG4EjYOMetySI6zIlnq36CL.017VH2Q57DPYSVH3JTIJGJAECRAEPOYWNW": {
+        "dataSources": {
+          "PerfilAcesso": {
+            "tableName": "PerfilAcesso"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "PerfilAcesso"
+    ],
+    "dependencies": {
+      "fileSource": "12c127d6-7532-4557-b028-4c2011270d3a"
+    },
+    "dependents": [],
+    "id": "b207307e-02e0-4bbe-b2d7-49dbc80b1b07"
+  },
+  "d0f9872b-0fbc-4135-a06f-411f01aad307": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "OneDrive for Business",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1546/1.0.1546.2665/onedriveforbusiness/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_onedriveforbusiness",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "ec1722b5-b6da-466c-a421-d6fd184c3cad"
+    ],
+    "id": "d0f9872b-0fbc-4135-a06f-411f01aad307"
+  },
+  "e321dd94-abd0-40fe-9dd9-4bcdffc4c185": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Outlook",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1599/1.0.1599.3017/office365/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Outlook"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "e321dd94-abd0-40fe-9dd9-4bcdffc4c185"
+  },
+  "ec1722b5-b6da-466c-a421-d6fd184c3cad": {
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Excel",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1599/1.0.1599.3017/excel/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_excel",
+      "parameterHints": {
+        "d0f9872b-0fbc-4135-a06f-411f01aad307": {
+          "value": "fileSource"
+        }
+      },
+      "parameterHintsV2": {
+        "fileSource": {
+          "value": "d0f9872b-0fbc-4135-a06f-411f01aad307"
+        }
+      }
+    },
+    "datasets": {
+      "b!CrfTSrIZxkab5zj1s2BX9O5lqIe2RrBMkBmYdxaD9oG4EjYOMetySI6zIlnq36CL.017VH2Q57DPYSVH3JTIJGJAECRAEPOYWNW": {
+        "dataSources": {
+          "Horas": {
+            "tableName": "Horas"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Horas"
+    ],
+    "dependencies": {
+      "fileSource": "d0f9872b-0fbc-4135-a06f-411f01aad307"
+    },
+    "dependents": [],
+    "id": "ec1722b5-b6da-466c-a421-d6fd184c3cad"
+  }
+}

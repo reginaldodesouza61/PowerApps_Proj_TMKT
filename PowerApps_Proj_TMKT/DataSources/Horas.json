@@ -1,0 +1,21 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_excel",
+    "CdpRevision": {
+      "BaseUrl": "/",
+      "LastChangedTimeString": "2021-04-26T17:40:33.7320000Z",
+      "RevisionNumber": 1
+    },
+    "ConnectedDataSourceInfoNameMapping": {
+      "__PowerAppsId__": "Row id",
+      "Hora": "Hora",
+      "Min": "Min"
+    },
+    "DatasetName": "b!CrfTSrIZxkab5zj1s2BX9O5lqIe2RrBMkBmYdxaD9oG4EjYOMetySI6zIlnq36CL.017VH2Q57DPYSVH3JTIJGJAECRAEPOYWNW",
+    "EncodeDataset": true,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "Horas",
+    "Type": "ConnectedDataSourceInfo"
+  }
+]

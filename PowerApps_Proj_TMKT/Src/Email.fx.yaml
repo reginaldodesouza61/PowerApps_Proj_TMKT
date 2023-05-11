@@ -1,0 +1,699 @@
+"Email As screen.'tabletLayout_Email_ver3.0'":
+    LoadingSpinnerColor: =RGBA(73, 130, 5, 1)
+
+    RectQuickActionBar1 As rectangle:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        Fill: =RGBA(73, 130, 5, 1)
+        Height: =64
+        Width: =1356
+        Y: =7
+        ZIndex: =1
+
+    "Gallery1 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderStyle: =BorderStyle.Dashed
+        BorderThickness: =2
+        Height: =587
+        Items: =Sort(Filter(Dados,LiberadoRH = "Aguardando notificação",User().FullName= Responsável,NomeDoAgente=Label10.Text,Email=""),CdgAgente,SortOrder.Descending)
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =99
+        Width: =512
+        X: =704
+        Y: =162
+        ZIndex: =1
+
+        Title3 As label:
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =16
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =20
+            Text: =ThisItem.CadastradoSistema
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =16
+            ZIndex: =1
+
+        Subtitle2 As label:
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            Font: =Font.'Segoe UI'
+            Height: =47
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: |-
+                ="Data da "& ThisItem.Tipo&": " & Text(ThisItem.DataComp,DateTimeFormat.ShortDate) & " - " & ThisItem.Inicio & " às " &ThisItem.Final
+            VerticalAlign: =VerticalAlign.Top
+            Width: =503
+            X: =9
+            Y: =44
+            ZIndex: =2
+
+        Separator2 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+    LblAppName1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Segoe UI'
+        Height: =64
+        PaddingLeft: =0
+        Size: =18
+        Text: ="Email"
+        Width: =Parent.Width - Self.X - 64
+        Wrap: =false
+        ZIndex: =2
+
+    iconMail1 As icon.Send:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(240, 240, 240, 0.5)
+        DisplayMode: |-
+            =/*Email must have a subject and recipients to be sent*/
+            If(Len(Trim(TextEmailSubject1.Text)) > 0 && !IsEmpty(MyPeople), DisplayMode.Edit, DisplayMode.Disabled)
+        Height: =57
+        Icon: =Icon.Send
+        OnSelect: |
+            =/*Create semicolon separated list of people to email, send the email, reset subject & message fields*/           
+            Set(_emailRecipientString, Concat(MyPeople, Mail & ";"));           
+            Office365Outlook.SendEmail(_emailRecipientString, TextEmailSubject1.Text,HtmlText1.HtmlText,{IsHtml:true})
+            ;
+            
+            With( { EmailEnviado: Filter( Dados,LiberadoRH = "Aguardando notificação",Email="",User().FullName= Responsável,NomeDoAgente=Label10.Text) },
+                  ForAll( EmailEnviado, 
+                          Patch( Dados, ThisRecord, { Email: "Enviado",LiberadoRH:"Triagem"}) ) );
+            
+            Refresh(Dados);
+            
+            Reset(TextEmailSubject1);           
+            Reset(TextEmailMessage1);           
+            Clear(MyPeople);
+            TextInput2.Text = "0";
+            Navigate(Tela_Meus_Cadastros);
+        PaddingBottom: =14
+        PaddingLeft: =14
+        PaddingRight: =14
+        PaddingTop: =14
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Tooltip: ="Enviar mensagem"
+        X: =Parent.Width - Self.Width
+        Y: =7
+        ZIndex: =3
+
+    LblRecipientCount1 As label:
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Segoe UI'
+        PaddingLeft: =0
+        Size: =13
+        Text: ="*Para (" &CountRows(MyPeople) & ")"
+        Width: =542
+        Wrap: =false
+        X: =13
+        Y: =79
+        ZIndex: =4
+
+    TextSearchBox1 As text:
+        AccessibleLabel: ="Pesquise pessoas ou adicione um endereço de email. Pelo menos um destinatário é necessário para um envio com êxito."
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        Default: =
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        HintText: ="Pesquisar pessoas ou adicionar endereço de email"
+        HoverBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverColor: =RGBA(51, 51, 51, 1)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        PaddingLeft: =50
+        PressedBorderColor: =RGBA(73, 130, 5, 1)
+        PressedColor: =RGBA(51, 51, 51, 1)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =13
+        Width: =510
+        X: =19
+        Y: =120
+        ZIndex: =5
+
+    SearchIcon1 As icon.Search:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(73, 130, 5, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =Self.Width
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.Search
+        PaddingBottom: =8
+        PaddingLeft: =8
+        PaddingRight: =8
+        PaddingTop: =8
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Tooltip: ="Pesquisar"
+        Width: =TextSearchBox1.Height
+        X: =TextSearchBox1.X + 5
+        Y: =TextSearchBox1.Y
+        ZIndex: =6
+
+    AddIcon1 As icon.Add:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(73, 130, 5, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =TextSearchBox1.Height
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.Add
+        OnSelect: |-
+            =Collect(MyPeople,           
+            {DisplayName: TextSearchBox1.Text, UserPrincipalName: TextSearchBox1.Text, Mail: TextSearchBox1.Text});           
+            Reset(TextSearchBox1)
+        PaddingBottom: =5
+        PaddingLeft: =5
+        PaddingRight: =5
+        PaddingTop: =5
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        TabIndex: =0
+        Tooltip: ="Selecionar para adicionar usuário à coleção"
+        Visible: |-
+            =!IsBlank(TextSearchBox1.Text) &&           
+            
+            /*Is user entry a valid email address*/           
+            IsMatch(TextSearchBox1.Text, Match.Email)           &&
+            
+            Not(Trim(TextSearchBox1.Text) in MyPeople.UserPrincipalName)
+        Width: =70
+        X: =TextSearchBox1.X + TextSearchBox1.Width - Self.Width - 10
+        Y: =TextSearchBox1.Y
+        ZIndex: =7
+
+    EmailPeopleGallery1 As gallery.SelectedUsersTabletGallery:
+        AccessibleLabel: ="Pessoas selecionadas do usuário"
+        BorderColor: =TextSearchBox1.BorderColor
+        Height: |-
+            =/*Height adjusts to number of items in gallery*/
+            Min((Self.TemplateHeight + Self.TemplatePadding * 2) * RoundUp(CountRows(Self.AllItems) / 4, 0), 182)
+        Items: |-
+            =/*Collection of user selected people*/
+            MyPeople
+        Layout: =Layout.Vertical
+        ShowScrollbar: =Self.Height >= 182
+        TemplateSize: =42
+        Width: =Parent.Width - Self.X * 2
+        WrapCount: =4
+        X: =27
+        Y: =TextSearchBox1.Y + TextSearchBox1.Height
+        ZIndex: =8
+
+        Rectangle1 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            DisabledFill: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(73, 130, 5, 1)
+            FocusedBorderThickness: =4
+            Height: =Parent.TemplateHeight
+            HoverFill: =RGBA(73, 130, 5, 1)
+            OnSelect: =Select(Parent)
+            PressedFill: =RGBA(73, 130, 5, 1)
+            Width: =Parent.TemplateWidth
+            ZIndex: =1
+
+        Title1 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =EmailPeopleGallery1.TemplateHeight
+            OnSelect: =Set(_selectedUser, ThisItem)
+            PaddingLeft: =10
+            Size: =13
+            TabIndex: =If(PeopleBrowseGallery1.Visible, -1, 0)
+            Text: =ThisItem.DisplayName
+            Width: =EmailPeopleGallery1.TemplateWidth - iconRemove1.Width + 10
+            Wrap: =false
+            ZIndex: =2
+
+        iconRemove1 As icon.Cancel:
+            AccessibleLabel: =iconRemove1.Tooltip
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =Title1.Color
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(220, 220, 220, 1)
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            Height: =EmailPeopleGallery1.TemplateHeight
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Icon: =Icon.Cancel
+            OnSelect: =Remove(MyPeople, LookUp(MyPeople, UserPrincipalName = ThisItem.UserPrincipalName))
+            PaddingBottom: =9
+            PaddingLeft: =9
+            PaddingRight: =9
+            PaddingTop: =9
+            PressedBorderColor: =RGBA(0, 0, 0, 0)
+            PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            TabIndex: =If(PeopleBrowseGallery1.Visible, -1, 0)
+            Tooltip: ="Selecionar para remover usuário da coleção"
+            Width: =Self.Height
+            X: =EmailPeopleGallery1.TemplateWidth - Self.Width
+            ZIndex: =3
+
+    LblEmailSubject1 As label:
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Segoe UI'
+        Height: =34
+        PaddingLeft: =0
+        Size: =13
+        Text: ="*Assunto"
+        Width: =510
+        Wrap: =false
+        X: =29
+        Y: =214
+        ZIndex: =9
+
+    TextEmailSubject1 As text:
+        AccessibleLabel: ="É necessário um assunto para enviar um email."
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        Default: |-
+            =Gallery1.Selected.Tipo&": " & Label10.Text
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =49
+        HintText: ="Adicionar um assunto"
+        HoverBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverColor: =RGBA(51, 51, 51, 1)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        Mode: =TextMode.MultiLine
+        PressedBorderColor: =RGBA(73, 130, 5, 1)
+        PressedColor: =RGBA(51, 51, 51, 1)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =13
+        TabIndex: =If(PeopleBrowseGallery1.Visible, -1, 0)
+        Width: =610
+        X: =29
+        Y: =246
+        ZIndex: =10
+
+    LblEmailMessage1 As label:
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Segoe UI'
+        Height: =26
+        PaddingLeft: =0
+        Size: =13
+        Text: |-
+            ="Mensagem:"
+        Width: =200
+        Wrap: =false
+        X: =24
+        Y: =314
+        ZIndex: =11
+
+    TextEmailMessage1 As text:
+        AccessibleLabel: =
+        BorderColor: =RGBA(25, 46, 1, 1)
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        Default: |
+            ="Ao Departamento de Recursos Humanos," &Char(13)& "Deus Está Presente!"&Char(13)&Char(13)&
+            "Segue anexo, solicitação da operadora " & ComboBox1.Selected.Result&","& " para Compensação da Jornada de Trabalho, referente ao período relacionado abaixo:" &Char(13)&
+            
+            
+            
+            Char(13)&
+            Char(13)&
+            Char(13)&
+            Char(13)&
+            Char(13)& 
+            
+            
+            
+            "Viva Jesus !"
+            &Char(13)&
+            User().FullName&Char(13)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =153
+        HintText: ="Adicionar uma mensagem"
+        HoverBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverColor: =RGBA(51, 51, 51, 1)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        Mode: =TextMode.MultiLine
+        OnSelect: =
+        PressedBorderColor: =RGBA(73, 130, 5, 1)
+        PressedColor: =RGBA(51, 51, 51, 1)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =13
+        TabIndex: =If(PeopleBrowseGallery1.Visible, -1, 0)
+        Visible: =false
+        Width: =672
+        X: =32
+        Y: =542
+        ZIndex: =12
+
+    PeopleBrowseGallery1 As gallery.PeoplePickerGallerySmallTablet:
+        AccessibleLabel: ="Resultados da pesquisa de usuários"
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderThickness: =2
+        Fill: =Parent.Fill
+        Height: =If(Self.Visible, Parent.Height / 2 + 200, 0)
+        Items: |-
+            =/*Only use Office 365 Users operation if user has started searching*/
+            If(!IsBlank(Trim(TextSearchBox1.Text)), 'UsuáriosdoOffice365'.SearchUser({searchTerm: Trim(TextSearchBox1.Text), top: 15}))
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =104
+        Visible: =!IsBlank(Trim(TextSearchBox1.Text))
+        Width: =Parent.Width - Self.X * 2
+        X: =32
+        Y: =TextSearchBox1.Y + TextSearchBox1.Height
+        ZIndex: =13
+
+        Rectangle2 As rectangle:
+            BorderColor: =Title2.Color
+            BorderThickness: =If(ThisItem.UserPrincipalName in MyPeople.UserPrincipalName, 4, 0)
+            DisabledFill: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(0,0,0,0)
+            Height: =Parent.TemplateHeight
+            HoverFill: =RGBA(0,0,0,0)
+            OnSelect: =Select(Title2)
+            PressedFill: =RGBA(73, 130, 5, 1)
+            Width: =Parent.TemplateWidth
+            ZIndex: =1
+
+        Title2 As label:
+            BorderColor: =Self.Color
+            Color: =RGBA(51, 51, 51, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            OnSelect: |-
+                =/*Select user, clear search contents and if this user hasn't been added to MyPeople collection, add them*/
+                Concurrent(
+                Set(_selectedUser, ThisItem),
+                Reset(TextSearchBox1),
+                If(Not(ThisItem.UserPrincipalName in MyPeople.UserPrincipalName), Collect(MyPeople, ThisItem)))
+            Size: =17
+            TabIndex: =0
+            Text: =ThisItem.DisplayName
+            Width: =PeopleBrowseGallery1.TemplateWidth - 2 * Self.X
+            Wrap: =false
+            X: =16
+            Y: =4
+            ZIndex: =2
+
+        Subtitle1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =ColorFade(Title2.Color, 0.20)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            OnSelect: =Select(Title2)
+            Size: =17
+            Text: =ThisItem.UserPrincipalName
+            Width: =PeopleBrowseGallery1.TemplateWidth - 2 * Self.X
+            Wrap: =false
+            X: =Title2.X
+            Y: =Title2.Y + Title2.Height + 3
+            ZIndex: =3
+
+        Separator1 As rectangle:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =4
+
+    ComboBox1 As combobox:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        ChevronBackground: =RGBA(255, 255, 255, 1)
+        ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+        ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+        ChevronFill: =RGBA(33, 33, 33, 1)
+        ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+        ChevronHoverFill: =RGBA(33, 33, 33, 1)
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        DisplayFields: =["Result"]
+        Font: =Font.'Segoe UI'
+        Height: =46
+        HoverBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverColor: =RGBA(51, 51, 51, 1)
+        HoverFill: =RGBA(212, 212, 212, 1)
+        IsSearchable: =false
+        Items: |-
+            =ForAll(Distinct(Dados,NomeDoAgente), {Result: ThisRecord.Value}).Result
+        PressedBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =RGBA(73, 130, 5, 1)
+        SearchFields: =["Result"]
+        SearchItems: =[]
+        SelectionFill: =RGBA(73, 130, 5, 1)
+        Size: =13
+        Visible: =false
+        Width: =106
+        X: =565
+        Y: =153
+        ZIndex: =15
+
+    Title12_2 As label:
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =33
+        OnSelect: =
+        PaddingBottom: =0
+        PaddingLeft: =0
+        PaddingRight: =0
+        PaddingTop: =0
+        Size: =20
+        Text: =
+        VerticalAlign: =VerticalAlign.Top
+        Width: =0
+        X: =49
+        Y: =65
+        ZIndex: =16
+
+    HtmlText1 As htmlViewer:
+        BorderStyle: =BorderStyle.Solid
+        BorderThickness: =2
+        Height: =403
+        HtmlText: |-
+            ="<b> Ao Departamento de Recursos Humanos,</b>"&
+            "<br> Deus Está Presente!</br>"&
+            "<br></li>"&
+            "<br> Segue anexo solicitação do operador(a),</b>"&" " &Label10.Text& " para " & Gallery1.Selected.Tipo & ":"&
+            "<br></li>"&
+            "<br></li>"&
+            
+            "<li> Nome:</b> " & Gallery1.Selected.NomeDoAgente&
+            "<b></b>"& "</br>" & 
+            "<li>Responsável: </b>" & Gallery1.Selected.Responsável& "  "&"</br>" &
+            "<li>Segue abaixo as informações: </li>" & "<ol>"&
+            Concat(Gallery1.AllItems,"<li>"& "Período: "& Text(DataComp,DateTimeFormat.ShortDate) & " ("& "Início/Final: "& Inicio& " - " & Final& ")" &" ("& Justificativa &" )</li>")& "</ol>"
+            
+            &"<br> Viva Jesus !</br>"&
+            "<br></b>"&
+            User().FullName&
+            "<ol>********************************************************</br>"&
+            ReceberEmail.HtmlText
+        Width: =615
+        X: =24
+        Y: =346
+        ZIndex: =18
+
+    Label9 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =34
+        Size: =13
+        Text: ="Operador(a)"
+        X: =704
+        Y: =79
+        ZIndex: =19
+
+    Button4 As button:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(73, 130, 5, 1)
+        FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =ColorFade(RGBA(73, 130, 5, 1), -10%)
+        OnSelect: |+
+            =With( { EmailEnviado: Filter( Dados,LiberadoRH = "Triagem",Email="",User().FullName= Responsável,NomeDoAgente=ComboBox1.Selected.Result) },
+                  ForAll( EmailEnviado, 
+                          Patch( Dados, ThisRecord, { Email: "Enviado Por: " & User().FullName } ) ) );
+            
+            
+            
+            
+            
+            
+        PressedBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -50%)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =15
+        Text: ="Botão"
+        Visible: =false
+        Width: =70
+        X: =583
+        Y: =125
+        ZIndex: =20
+
+    Label10 As label:
+        BorderColor: =RGBA(124, 141, 103, 1)
+        BorderThickness: =2
+        Color: =RGBA(184, 0, 0, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Fill: =RGBA(230, 230, 230, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =44
+        Size: =15
+        Text: =Gallery4.Selected.NomeDoAgente
+        Width: =512
+        X: =704
+        Y: =118
+        ZIndex: =21
+
+    Icon2_15 As icon.CalendarBlank:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =46
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.CancelBadge
+        OnSelect: =Navigate(Tela_Meus_Cadastros)
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =44
+        X: =1237
+        Y: =12
+        ZIndex: =22
+
+    Icon17 As icon.Mail:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.Mail
+        OnSelect: =Navigate(Tela_Receber_Email)
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        X: =1249
+        Y: =122
+        ZIndex: =24
+
+    Icon18 As icon.Mail:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(73, 130, 5, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        HoverBorderColor: =RGBA(204, 204, 204, 1)
+        HoverColor: =RGBA(184, 0, 0, 1)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        Icon: =Icon.AddDocument
+        OnSelect: =Navigate(ReceberEmail)
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Tooltip: ="Anexar email recebido do operador(a)"
+        X: =1249
+        Y: =131
+        ZIndex: =25
+

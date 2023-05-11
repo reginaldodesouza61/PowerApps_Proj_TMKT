@@ -1,0 +1,46 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_excel",
+    "CdpRevision": {
+      "BaseUrl": "/",
+      "LastChangedTimeString": "2021-04-26T17:40:33.7320000Z",
+      "RevisionNumber": 1
+    },
+    "ConnectedDataSourceInfoNameMapping": {
+      "__PowerAppsId__": "Row id",
+      "CadastradoSistema": "CadastradoSistema",
+      "CdgAgente": "CdgAgente",
+      "DataCadastro": "DataCadastro",
+      "DataComp": "DataComp",
+      "DataEnvioAcordo": "DataEnvioAcordo",
+      "DataLançado": "DataLançado",
+      "DataRetornoAcordo": "DataRetornoAcordo",
+      "Descontar": "Descontar",
+      "Email": "Email",
+      "EnviadoPor": "EnviadoPor",
+      "EnvioEmailAcordoOperador": "EnvioEmailAcordoOperador",
+      "Final": "Final",
+      "ID": "ID",
+      "Inicio": "Inicio",
+      "Justificativa": "Justificativa",
+      "LançadoPor": "LançadoPor",
+      "LançamentoDesconto": "LançamentoDesconto",
+      "LiberadoRH": "LiberadoRH",
+      "LiberadoSuporte": "LiberadoSuporte",
+      "MotivoRecusado": "MotivoRecusado",
+      "NmeEquipe_x0020_": "NmeEquipe ",
+      "NomeDoAgente": "NomeDoAgente",
+      "Observação": "Observação",
+      "Responsável": "Responsável",
+      "Tipo": "Tipo",
+      "TotalComp": "TotalComp",
+      "TurnodaEquipe": "TurnodaEquipe"
+    },
+    "DatasetName": "b!CrfTSrIZxkab5zj1s2BX9O5lqIe2RrBMkBmYdxaD9oG4EjYOMetySI6zIlnq36CL.017VH2Q57DPYSVH3JTIJGJAECRAEPOYWNW",
+    "EncodeDataset": true,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "Dados",
+    "Type": "ConnectedDataSourceInfo"
+  }
+]
