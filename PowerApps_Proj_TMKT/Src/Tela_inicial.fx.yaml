@@ -1,0 +1,515 @@
+Tela_inicial As screen:
+    BackgroundImage: =Imagem_Fundo
+    ImagePosition: =ImagePosition.Fill
+    LoadingSpinnerColor: =RGBA(73, 130, 5, 1)
+    OnVisible: |-
+        =Collect('Coleção 1', {Image: Image2.Image})
+
+    Image2 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =210
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: =Img_Fundo3
+        ImagePosition: =ImagePosition.Fill
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =1366
+        ZIndex: =1
+
+    Image3 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: =User().Image
+        ImagePosition: =ImagePosition.Fill
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        RadiusBottomLeft: =150
+        RadiusBottomRight: =150
+        RadiusTopLeft: =150
+        RadiusTopRight: =150
+        Width: =85
+        X: =28
+        Y: =23
+        ZIndex: =2
+
+    Label1 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =36
+        Size: =13
+        Text: =User().FullName&Char(13)
+        Width: =926
+        Y: =174
+        ZIndex: =3
+
+    Icon1_1 As icon.CalendarBlank:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(0, 16, 96, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =99
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.LogJournal
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =96
+        X: =48
+        Y: =425
+        ZIndex: =8
+
+    Botão_Jornada As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =8
+
+        Icon1 As icon.CalendarBlank:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            Color: =RGBA(0, 16, 96, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(220, 220, 220, 1)
+            DisabledFill: =RGBA(230, 230, 230, 1)
+            FocusedBorderThickness: =4
+            Height: =99
+            HoverBorderColor: =
+            HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            Icon: =Icon.CalendarBlank
+            OnSelect: |-
+                =Switch(
+                    TextInput1.Text,
+                    "Gerente",
+                    Navigate(Tela_Cadastro_Jornada),
+                    "Coordenador de TMKT",
+                    Navigate(Tela_Cadastro_Jornada),
+                    Notify(
+                        "Sem permissão para esse módulo!",
+                        NotificationType.Error
+                    )
+                )
+            PressedBorderColor: =RGBA(0, 0, 0, 0)
+            PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            Width: =103
+            X: =49
+            Y: =254
+            ZIndex: =4
+
+        Label2 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(0, 18, 107, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(230, 230, 230, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =72
+            HoverBorderColor: =
+            HoverFill: =RGBA(0, 0, 0, 0)
+            OnSelect: |-
+                =Switch(
+                    TextInput1.Text,
+                    "Gerente",
+                    Navigate(Tela_Cadastro_Jornada),
+                    "Coordenador de TMKT",
+                    Navigate(Tela_Cadastro_Jornada),
+                    Notify(
+                        "Sem permissão para esse módulo!",
+                        NotificationType.Error
+                    )
+                )
+            Size: =21
+            Text: ="Cadastro de Jornada de trabalho"
+            Width: =541
+            X: =179
+            Y: =249
+            ZIndex: =5
+
+        Label2_1 As label:
+            BorderColor: =RGBA(0, 0, 0, 0)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =2
+            Color: =RGBA(167, 182, 203, 1)
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(230, 230, 230, 1)
+            FocusedBorderThickness: =4
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =72
+            HoverBorderColor: =
+            HoverFill: =RGBA(0, 0, 0, 0)
+            OnSelect: |-
+                =Switch(
+                    TextInput1.Text,
+                    "Gerente",
+                    Navigate(Tela_Cadastro_Jornada),
+                    "Coordenador de TMKT",
+                    Navigate(Tela_Cadastro_Jornada),
+                    Notify(
+                        "Sem permissão para esse módulo!",
+                        NotificationType.Error
+                    )
+                )
+            Size: =15
+            Text: |-
+                ="Precisa cadastrar jornada de trabalho?
+                Solicite aqui nesse formulário"
+            Width: =541
+            X: =179
+            Y: =294
+            ZIndex: =6
+
+        Button1 As button:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            DisabledBorderColor: =RGBA(255, 255, 255, 1)
+            DisabledColor: =RGBA(166, 166, 166, 1)
+            DisabledFill: =RGBA(230, 230, 230, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =142
+            HoverBorderColor: =
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(0, 0, 0, 0)
+            OnSelect: |-
+                =Switch(
+                    TextInput1.Text,
+                    "Gerente",
+                    Navigate(Tela_Cadastro_Jornada),
+                    "Coordenador de TMKT",
+                    Navigate(Tela_Cadastro_Jornada),
+                    Notify(
+                        "Sem permissão para esse módulo!",
+                        NotificationType.Error
+                    )
+                )
+            PressedBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -50%)
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =15
+            Text: =""
+            Width: =1026
+            X: =28
+            Y: =232
+            ZIndex: =7
+
+    Label2_2 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 18, 107, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =72
+        Size: =21
+        Text: ="Envio acordo de compensação"
+        Width: =505
+        X: =179
+        Y: =405
+        ZIndex: =9
+
+    Label2_3 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(167, 182, 203, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =72
+        Size: =15
+        Text: |-
+            ="Precisa enviar acordo de compensação?
+            Solicite aqui nesse formulário"
+        Width: =505
+        X: =179
+        Y: =450
+        ZIndex: =10
+
+    Button1_1 As button:
+        BorderColor: =RGBA(230, 230, 230, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(0, 0, 0, 1)
+        DisabledFill: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =142
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        OnSelect: =Switch(UsuáriosdoOffice365.MyProfile().JobTitle,"Auxiliar de Pessoal",Navigate(Tela_GerenciarSolicitacoes),"Suporte TMKT",Navigate(Tela_GerenciarSolicitacoes),"Chefe Setor",Navigate(Tela_GerenciarSolicitacoes),Notify("Sem permissão",NotificationType.Error))
+        PressedBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -50%)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =15
+        Text: =""
+        Width: =1016
+        X: =38
+        Y: =405
+        ZIndex: =11
+
+    Icon1_2 As icon.CalendarBlank:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        Color: =RGBA(0, 16, 96, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(220, 220, 220, 1)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderThickness: =4
+        Height: =99
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Icon: =Icon.Support
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Width: =96
+        X: =48
+        Y: =603
+        ZIndex: =12
+
+    Label2_4 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(0, 18, 107, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =72
+        Size: =21
+        Text: ="Precisa liberar operadores no sistema ?"
+        Width: =532
+        X: =189
+        Y: =603
+        ZIndex: =13
+
+    Label2_5 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(167, 182, 203, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =72
+        Size: =15
+        Text: ="Visualize nesse formulário os operadores"
+        Width: =505
+        X: =189
+        Y: =648
+        ZIndex: =14
+
+    Button1_2 As button:
+        BorderColor: =RGBA(230, 230, 230, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =142
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        OnSelect: =Switch(TextInput1.Text,"Gerente",Navigate(Tela_Suporte),"Suporte de TMKT",Navigate(Tela_Suporte),Notify("Sem permissão para esse módulo!",NotificationType.Error))
+        PressedBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -50%)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =15
+        Text: =""
+        Width: =1026
+        X: =28
+        Y: =581
+        ZIndex: =15
+
+    Label1_1 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =36
+        Size: =12
+        Text: =UsuáriosdoOffice365.MyProfile().JobTitle
+        Width: =428
+        X: =14
+        Y: =123
+        ZIndex: =16
+
+    Label5 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =89
+        Size: =35
+        Text: ="Cadastro da Jornada de Trabalho do Agente"
+        Width: =1171
+        X: =179
+        ZIndex: =17
+
+    Label6 As label:
+        Align: =Align.Right
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =27
+        Italic: =true
+        Size: =10
+        Text: |-
+            ="Desenvolvido por: Reginaldo de Souza"
+        Width: =352
+        X: =1014
+        Y: =740
+        ZIndex: =18
+
+    Label7 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Size: =13
+        Text: =
+        X: =1062
+        Y: =326
+        ZIndex: =19
+
+    Button1_3 As button:
+        BorderColor: =RGBA(230, 230, 230, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(0, 0, 0, 1)
+        DisabledFill: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =ColorFade(Self.Fill, -75%)
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =144
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =RGBA(255, 255, 255, 1)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        OnSelect: |-
+            =Switch(
+                TextInput1.Text,
+                "Gerente",
+                Navigate(Tela_GerenciarSolicitacoes),
+                "Recursos Humanos",
+                Navigate(Tela_GerenciarSolicitacoes),
+                Notify(
+                    "Sem permissão para esse módulo!",
+                    NotificationType.Error
+                )
+            )
+        PressedBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -50%)
+        PressedColor: =RGBA(255, 255, 255, 1)
+        PressedFill: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =15
+        Text: =""
+        Width: =1026
+        X: =28
+        Y: =406
+        ZIndex: =21
+
+    TextInput1 As text:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderThickness: =2
+        Color: =RGBA(51, 51, 51, 1)
+        Default: =LookUp(PerfilAcesso, Nome = User().FullName, Perfil )
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        DisabledFill: =RGBA(244, 244, 244, 1)
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        Height: =42
+        HoverBorderColor: =ColorFade(RGBA(73, 130, 5, 1), -30%)
+        HoverColor: =RGBA(51, 51, 51, 1)
+        HoverFill: =RGBA(255, 255, 255, 1)
+        PressedBorderColor: =RGBA(73, 130, 5, 1)
+        PressedColor: =RGBA(51, 51, 51, 1)
+        PressedFill: =RGBA(255, 255, 255, 1)
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =13
+        Visible: =false
+        Width: =150
+        X: =1102
+        Y: =309
+        ZIndex: =23
+

@@ -1,0 +1,44 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_excel",
+    "CdpRevision": {
+      "BaseUrl": "/",
+      "LastChangedTimeString": "2021-04-26T17:40:33.7320000Z",
+      "RevisionNumber": 1
+    },
+    "ConnectedDataSourceInfoNameMapping": {
+      "__PowerAppsId__": "Row id",
+      "Categoria_x0020_do_x0020_agente": "Categoria do agente",
+      "Código": "Código",
+      "Data_x0020_da_x0020_última_x0020_conexão": "Data da última conexão",
+      "Data_x0020_da_x0020_última_x0020_redefinição_x0020_de_x0020_senha": "Data da última redefinição de senha",
+      "Data_x0020_de_x0020_cadastro": "Data de cadastro",
+      "Data_x0020_de_x0020_encerramento": "Data de encerramento",
+      "Data_x0020_do_x0020_bloqueio": "Data do bloqueio",
+      "Data_x0020_do_x0020_desbloqueio": "Data do desbloqueio",
+      "Entrega_x0020_de_x0020_contatos_x0020_abertos_x0020_por_x0020_dia": "Entrega de contatos abertos por dia",
+      "Equipe": "Equipe",
+      "Grupo_x0020_de_x0020_trabalho": "Grupo de trabalho",
+      "Login": "Login",
+      "Login_x0020_ID": "Login ID",
+      "Matrícula": "Matrícula",
+      "Motivo_x0020_do_x0020_bloqueio": "Motivo do bloqueio",
+      "Nome": "Nome",
+      "Perfil_x0020_de_x0020_acesso": "Perfil de acesso",
+      "Situação": "Situação",
+      "Tipo": "Tipo",
+      "Tipo_x0020_de_x0020_conta": "Tipo de conta",
+      "Unidade": "Unidade",
+      "Usuário_x0020_bloqueado_x003f_": "Usuário bloqueado?",
+      "Usuário_x0020_cad_x002e_": "Usuário cad.",
+      "Usuário_x0020_encerrou": "Usuário encerrou",
+      "Versão_x0020_do_x0020_sistema": "Versão do sistema"
+    },
+    "DatasetName": "b!CrfTSrIZxkab5zj1s2BX9O5lqIe2RrBMkBmYdxaD9oG4EjYOMetySI6zIlnq36CL.017VH2Q57DPYSVH3JTIJGJAECRAEPOYWNW",
+    "EncodeDataset": true,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "Name": "Agentes",
+    "Type": "ConnectedDataSourceInfo"
+  }
+]
